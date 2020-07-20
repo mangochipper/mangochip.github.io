@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online classes</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" 
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>
+    <style>
+        @import url(http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css);
+        *{
+            font-family: "Montsterrst";
+            
+        }
+        body{
+            overflow: hidden;
+        }
+        table{
+            text-align: center;
+            cursor: none;
+            justify-content: center;
+            
+        }
+        th,td,tr{
+            border-collapse: collapse;
+            border: 1px solid;
+        }
+        #box{
+            width: 500px;
+            overflow: hidden;
+            background: #f1f1f1;
+            box-shadow: 0 0 20px black;
+            border-radius: 8px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            z-index: 9999;
+            padding: 10px;
+            text-align: center;
+            display: none;
+        }
+        #box span{
+            color: #2ecc71;
+            font-size: 40px;
+            display: block;
+            margin: 20px 0;
+        }
+        #box h1{
+            color: #333;
+
+        }
+        .close{
+            font-size: 18px;
+            color: white;
+            padding: 10px 30px;
+            cursor: pointer;
+            background: #3498db;
+            display: inline-block;
+            border-radius: 4px;
+        }
+        #clockDisplay{
+            height: 100px;
+            width: 300px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            justify-content: center;
+            text-align: center;
+        }
+        .bottom{
+            position: relative;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 300px;
+            background-color: rgba(243, 243, 243, 0.808);
+        }
+        
+    </style>
+</head>
+<body >
+<table class="table table-hover table-dark ">
+        <tr class="bg-primary">
+              <th>Name of the subject</th> 
+              <th>Password</th> 
+              <th>User ID</th> 
+              <th>Button (PSWD)</th>
+              <th>Button (ID)</th>
+              <th>Working Days</th>
+        </tr>
+        <tr>
+            <td>Maths</td>
+            <td><p id="text1">757354</p></td>
+            <td><p id="id1">8804497540</p></td>
+            <td><button onclick="pop()" class="btn btn-success" data-clipboard-target="#text1">Copy</button></td>
+            <td><button onclick="pop()" class="btn btn-primary" data-clipboard-target="#id1">Copy</button></td>
+            <td>Monday to Saturday</td>
+        </tr>
+        <tr>
+            <td>Physics</td>
+            <td><p id="text2">396545</p></td>  
+            <td><p id="id2">4303859542</p></td>
+            <td><button onclick="pop()" class="btn btn-success" data-clipboard-target="#text2">Copy</button></td>
+            <td><button onclick="pop()" class="btn btn-primary" data-clipboard-target="#id2">Copy</button></td>
+            <td>Monday to Saturday</td>
+        </tr>
+        <tr class="bg-warning">
+            <td>Sanskrit</td>
+            <td><p id="text3">348325</p></td>
+            <td><p id="id3">7827203740</p></td>
+            <td>
+            <button onclick="pop()" class="btn btn-success" data-clipboard-target="#text3">Copy</button>
+            </td>
+            <td><button onclick="pop()" class="btn btn-primary" data-clipboard-target="#id3">Copy</button></td>
+            <td>Monday to Wednesday</td>
+        </tr>
+        <tr class="bg-danger">
+            <td>English</td>
+            <td><p id="text4">808944</p></td>
+            <td><p id="id4">3066458780</p></td>
+            <td>
+                <button onclick="pop()" class="btn btn-success" data-clipboard-target="#text4">Copy</button>
+            </td>
+            <td><button onclick="pop()" class="btn btn-primary" data-clipboard-target="#id4">Copy</button></td>
+            <td>Thursday to Saturday</td>
+
+        </tr>
+        <tr>
+            <td>Chemistry</td>
+            <td><p id="text5">8JBsDQ</p> </td>
+            <td><p id="id5">3032414820</p></td>
+            <td>
+               <button onclick="pop()" class="btn btn-success" data-clipboard-target="#text5">Copy</button>
+            </td>
+            <td><button onclick="pop()" class="btn btn-primary" data-clipboard-target="#id5">Copy</button></td>
+            <td>Monday to Saturday</td>
+        </tr>
+    </table> 
+    <div class="card" id="box" >
+        <span class="ion-checkmark-round"></span>
+        <h1>
+            Great Job !<br> Copied Successfully
+        </h1>
+        <a onclick="pop()" href="#" class="close">
+            close
+        </a>
+    </div>
+    <div class="bottom" >
+        <div id="clockDisplay" class="shadow p-3 mb-5 bg-white rounded">
+            <p>Date/Time: <span id="datetime"></span></p>
+            <script>
+            var dt = new Date();
+            document.getElementById("datetime").innerHTML = (("0"+dt.getDate()).slice(-2)) +"."+ (("0"+(dt.getMonth()+1)).slice(-2)) +"."+ (dt.getFullYear()) +" "+ (("0"+dt.getHours()).slice(-2)) +":"+ (("0"+dt.getMinutes()).slice(-2));
+                           
+                var m_names = ["January", "February", "March", 
+                "April", "May", "June", "July", "August", "September", 
+                "October", "November", "December"];
+                
+                var d_names = ["Sunday","Monday", "Tuesday", "Wednesday", 
+                "Thursday", "Friday", "Saturday"];
+                
+                var myDate = new Date();
+                myDate.setDate(myDate.getDate()+0);
+                var curr_date = myDate.getDate();
+                var curr_month = myDate.getMonth();
+                var curr_day  = myDate.getDay();
+                document.write(d_names[curr_day] + "," + m_names[curr_month] + " " +curr_date);
+                
+                  </script>
+        </div>
+    </div>
+
+    
+
+
+<script>
+var clipboard = new ClipboardJS('.btn');
+
+clipboard.on('success', function(e) {
+    console.info('Action:', e.action);
+    console.info('Text:', e.text);
+    console.info('Trigger:', e.trigger);
+
+    e.clearSelection();
+});
+
+clipboard.on('error', function(e) {
+    console.error('Action:', e.action);
+    console.error('Trigger:', e.trigger);
+});
+
+var c = 0;
+function pop() {
+    if( c == 0){
+        document.getElementById("box").style.display = "block";
+        c = 1;
+    }else{
+        document.getElementById("box").style.display = "none";
+        c = 0;
+    }
+}
+
+</script>
+</body>
+</html>
